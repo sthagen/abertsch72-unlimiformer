@@ -1,10 +1,10 @@
-# Unlimiformer
+# Unlimiformer: Long-Range Transformers with Unlimited Length Input (NeurIPS 2023)
 ![unlimiformer_diagram3_with_overlaps](https://github.com/abertsch72/unlimiformer/assets/15002544/55c5e623-b4de-48a5-b717-fe6ead95e66c)
 
 This is the official implementation of the paper:
 
 [Amanda Bertsch](https://www.cs.cmu.edu/~abertsch/), [Uri Alon](https://urialon.ml/), [Graham Neubig](http://www.phontron.com/), and [Matthew R. Gormley](http://www.cs.cmu.edu/~mgormley/):   
-[Unlimiformer: Long-Range Transformers with Unlimited Length Input](https://arxiv.org/pdf/2305.01625)
+[Unlimiformer: Long-Range Transformers with Unlimited Length Input](https://arxiv.org/pdf/2305.01625) (to appear in **NeurIPS 2023**)
 
 Unlimiformer is a method for augmenting pretrained encoder-decoder models with retrieval-based attention, without changing the mathematical definition of attention. 
 This allows the use of unlimited length inputs with any pretrained encoder-decoder!  
@@ -14,11 +14,13 @@ Unlimiformer can be used to improve the performance of an already-trained model.
 
 If you have any questions on this work, please open a [GitHub issue](https://github.com/abertsch72/unlimiformer/issues) or email the authors at ```abertsch@cs.cmu.edu, ualon@cs.cmu.edu```
 
+## **_October 2023_** - Unlimiformer will appear at NeurIPS 2023!
+
 ## **_August 2023_** - Unlimiformer now supports **Llama-2** (and all its derivatives)! 
 To prompt Llama-2 with extremely long inputs, for example, the content of an *entire book*, use:
 ```bash
 python src/run_generation.py --model_type llama --model_name_or_path meta-llama/Llama-2-13b-chat-hf \
-    --prefix "<<SYS>>\n You are a helpful assistant. Answer with detailed responses according to the entire instruction or question. \n<</SYS>>\n\n [INST] Summarize the following book: " \
+    --prefix "<s>[INST] <<SYS>>\n You are a helpful assistant. Answer with detailed responses according to the entire instruction or question. \n<</SYS>>\n\n Summarize the following book: " \
     --prompt example_inputs/harry_potter_full.txt \
     --suffix " [/INST]" --test_unlimiformer --fp16 --length 200 --layer_begin 16 \
     --index_devices 1 --datastore_device 1 
